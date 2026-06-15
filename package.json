@@ -1,0 +1,9 @@
+{
+  "name": "wmhs-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm install && npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "node backend/src/db/init.js && node backend/src/db/seed.js && node backend/src/server.js"
+  }
+}

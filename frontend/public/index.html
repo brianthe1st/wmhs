@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="World Mission High School Portal" />
+    <meta name="google-site-verification" content="o92y1o-ZPdwoBnKjUDGM6MowhPTIr9QfWW6ZoIbsSnY" />
+    <link rel="icon" href="%PUBLIC_URL%/logo.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo.png" />
+    <title>WMHS Portal</title>
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f7ff}
+      #root{min-height:100vh}
+      
+      /* Mobile responsiveness for Layout */
+      @media (max-width: 768px) {
+        .responsive-sidebar {
+          width: 64px !important;
+        }
+        .logo-text, .user-info, .nav-label, .portal-tag-container, .notification-dot {
+          display: none !important;
+        }
+        .nav-icon {
+          font-size: 20px !important;
+          margin: 0 auto !important;
+        }
+        .nav-item {
+          justify-content: center !important;
+          padding: 12px 0 !important;
+          gap: 0 !important;
+        }
+        .signout-btn {
+          padding: 10px 0 !important;
+        }
+        .signout-icon {
+          display: block !important;
+          font-size: 18px !important;
+        }
+        .main-header {
+          padding: 12px 16px !important;
+        }
+        .header-subtitle {
+          display: none !important;
+        }
+        
+        /* Modal responsiveness */
+        .modal-content {
+          width: 95% !important;
+          max-width: none !important;
+          margin: 0 !important;
+        }
+
+        .auth-container {
+          padding: 12px !important;
+        }
+
+        .page-container {
+          padding: 16px 12px !important;
+        }
+
+        .section-header {
+          flex-direction: column !important;
+          gap: 12px !important;
+        }
+        .section-action {
+          width: 100% !important;
+        }
+        .section-action button {
+          width: 100% !important;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .responsive-sidebar {
+          width: 56px !important;
+        }
+        .nav-item {
+          padding: 10px 0 !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>JavaScript is required to run this application.</noscript>
+    <div id="root"></div>
+  </body>
+</html>

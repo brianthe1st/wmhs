@@ -1,0 +1,19 @@
+databases:
+  - name: wmhs-db
+    plan: free
+
+services:
+  - type: web
+    name: wmhs-backend
+    env: node
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: wmhs-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
