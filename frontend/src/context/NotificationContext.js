@@ -18,12 +18,37 @@ const playSound = () => {
 
 export const NotificationProvider = ({ children }) => {
   const [toast, setToast] = useState(null);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const [showOnlineStatus, setShowOnlineStatus] = useState(false);
+
   const [unseenCounts, setUnseenCounts] = useState({
     announcements: 0,
     mywork: 0,
     results: 0,
     materials: 0
   });
+
+  // Connection monitoring
+  React.useEffect(() => {
+    const handleOnline = () => {
+      setIsOnline(true);
+      setShowOnlineStatus(true);
+      // Hide the "Back online" notification after 3 seconds
+      setTimeout(() => setShowOnlineStatus(false), 3000);
+    };
+    const handleOffline = () => {
+      setIsOnline(false);
+      setShowOnlineStatus(false);
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
   // Track seen IDs in reactive state + localStorage
   const [seenIds, setSeenIds] = useState(() => {
@@ -76,6 +101,77 @@ export const NotificationProvider = ({ children }) => {
   return (
     <NotificationContext.Provider value={{ showToast, markAsSeen, markMultipleAsSeen, unseenCounts, updateUnseen, getSeenIds }}>
       {children}
+      
+      {/* Offline Status Pill */}
+      <AnimatePresence>
+        {!isOnline && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, y: 50, x: '-50%', scale: 0.9 }}
+            style={{
+              position: 'fixed',
+              bottom: 24,
+              left: '50%',
+              zIndex: 10000,
+              background: 'rgba(239, 68, 68, 0.9)',
+              backdropFilter: 'blur(8px)',
+              color: '#fff',
+              padding: '10px 20px',
+              borderRadius: '99px',
+              fontSize: '13px',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              boxShadow: '0 10px 25px rgba(239, 68, 68, 0.25)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            <motion.span
+              animate={{ opacity: [1, 0.5, 1] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              📡
+            </motion.span>
+            Offline
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Online Status Pill */}
+      <AnimatePresence>
+        {isOnline && showOnlineStatus && (
+          <motion.div
+            initial={{ opacity: 0, y: 50, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, x: '-50%' }}
+            exit={{ opacity: 0, x: '-50%', scale: 0.9 }}
+            style={{
+              position: 'fixed',
+              bottom: 24,
+              left: '50%',
+              zIndex: 10000,
+              background: 'rgba(34, 197, 94, 0.9)',
+              backdropFilter: 'blur(8px)',
+              color: '#fff',
+              padding: '10px 20px',
+              borderRadius: '99px',
+              fontSize: '13px',
+              fontWeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px',
+              boxShadow: '0 10px 25px rgba(34, 197, 94, 0.25)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              whiteSpace: 'nowrap'
+            }}
+          >
+            <span>✅</span>
+            Back online
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Toast UI */}
       <AnimatePresence>
@@ -135,3 +231,4 @@ export const NotificationProvider = ({ children }) => {
     </NotificationContext.Provider>
   );
 };
+
