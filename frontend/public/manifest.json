@@ -4,13 +4,13 @@
   "description": "Visionary Minds, Creative Innovations. The official school management portal for World Mission High School.",
   "icons": [
     {
-      "src": "logo.png?v=3",
+      "src": "logo2.png?v=3",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "logo.png?v=3",
+      "src": "logo2.png?v=3",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
