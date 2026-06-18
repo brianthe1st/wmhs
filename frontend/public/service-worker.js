@@ -1,9 +1,9 @@
-const CACHE_NAME = 'wmhs-portal-v4';
+const CACHE_NAME = 'wmhs-portal-v7';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/logo2.png',
+  '/logo-512.png?v=6',
 ];
 
 // Install Event
@@ -63,8 +63,9 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchedResponse = fetch(request).then((networkResponse) => {
+        const responseToCache = networkResponse.clone();
         caches.open(CACHE_NAME).then((cache) => {
-          cache.put(request, networkResponse.clone());
+          cache.put(request, responseToCache);
         });
         return networkResponse;
       });

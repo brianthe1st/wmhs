@@ -257,7 +257,7 @@ export function fmtDateShort(iso) {
 export function Logo({ size=40 }) {
   return (
     <img 
-      src="/logo.png" 
+      src="/logo-512.png" 
       alt="WMHS Logo" 
       style={{ 
         width: size, 
