@@ -1,0 +1,40 @@
+# Render blueprint. IMPORTANT for a real school:
+#  • Free Postgres on Render expires after 30 days → use a paid plan ("basic-256mb" or higher) before going live.
+#  • Free web services sleep when idle and have NO persistent disk → use a paid plan, and either
+#    attach a disk (STORAGE_MODE=local, UPLOAD_DIR=/var/data/uploads) or set STORAGE_MODE=cloudinary.
+databases:
+  - name: wmhs-db
+    plan: basic-256mb
+
+services:
+  - type: web
+    name: wmhs-backend
+    env: node
+    plan: starter
+    buildCommand: CI=false npm run build
+    startCommand: npm start
+    healthCheckPath: /api/health
+    # Uncomment when using local file storage (keeps uploads across deploys):
+    # disk:
+    #   name: uploads
+    #   mountPath: /var/data
+    #   sizeGB: 5
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: wmhs-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: ADMIN_EMAIL
+        value: admin@yourschool.example      # CHANGE THIS
+      - key: ADMIN_PASSWORD
+        sync: false                          # you type it in the Render dashboard; used once to create the first admin
+      - key: STORAGE_MODE
+        value: local                         # or "cloudinary" + the three CLOUDINARY_* variables
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: TRUST_PROXY
+        value: "1"
