@@ -99,7 +99,7 @@ const loginPerAccount = rateLimit({
   windowMs: 15 * 60 * 1000, limit: num(process.env.LOGIN_RATE_LIMIT_MAX, 10),
   standardHeaders: true, legacyHeaders: false, skipSuccessfulRequests: true,
   keyGenerator: (req) => `${req.ip}|${String((req.body && req.body.email) || '').toLowerCase().slice(0, 120)}`,
-  validate: { keyGeneratorIpFallback: false },
+  validate: { ip: false },
   message: msg('Too many login attempts for this account. Please wait 15 minutes.'),
 });
 // Per IP: stops one machine spraying thousands of different emails.
