@@ -54,15 +54,15 @@ export default function AuthPage() {
 
   const tabStyle = (active) => ({
     flex:1, padding:'12px 8px', border:'none', cursor:'pointer', fontSize:15, fontWeight:600, background:'none',
-    color: active ? '#185fa5' : '#64748b',
-    borderBottom: active ? '3px solid #185fa5' : '3px solid #e2e8f0', minHeight:46,
+    color: active ? '#0c2b54' : '#64748b',
+    borderBottom: active ? '3px solid #0c2b54' : '3px solid #e2e8f0', minHeight:46,
   });
 
   return (
     <div className="auth-split" style={{ fontFamily:"'Segoe UI',system-ui,sans-serif" }}>
-      {/* LEFT / TOP — solid blue */}
+      {/* LEFT / TOP — solid deep blue */}
       <div className="auth-left">
-        <Logo size={96}/>
+        <Logo size={110}/>
         <h1 className="auth-title" style={{ fontSize:30, fontWeight:700, margin:'18px 0 8px', lineHeight:1.2 }}>
           World Mission High School
         </h1>
@@ -90,10 +90,10 @@ export default function AuthPage() {
                 onChange={e=>set('email',e.target.value)} placeholder="you@school.rw" required/>
               <Input label="Password" type="password" value={form.password} autoComplete="current-password"
                 onChange={e=>set('password',e.target.value)} placeholder="Your password" required/>
-              <Btn type="submit" style={{width:'100%'}} size="lg" loading={loading}>Sign In</Btn>
+              <Btn type="submit" style={{width:'100%', background:'#0c2b54'}} size="lg" loading={loading}>Sign In</Btn>
               <div style={{ textAlign:'center', marginTop:14 }}>
                 <button type="button" onClick={()=>go('forgot')}
-                  style={{ background:'none', border:'none', color:'#185fa5', fontSize:14, cursor:'pointer', padding:8 }}>
+                  style={{ background:'none', border:'none', color:'#0c2b54', fontSize:14, cursor:'pointer', padding:8, fontWeight:500 }}>
                   Forgot password?
                 </button>
               </div>
@@ -107,7 +107,7 @@ export default function AuthPage() {
               <Input label="Class Join Code" value={form.joinCode} onChange={e=>set('joinCode',e.target.value)} placeholder="e.g. XK7-R2" required/>
               <Input label="Password" type="password" value={form.password} autoComplete="new-password" onChange={e=>set('password',e.target.value)} placeholder={PW_RULE} required/>
               <Input label="Confirm Password" type="password" value={form.confirm} autoComplete="new-password" onChange={e=>set('confirm',e.target.value)} placeholder="Repeat password" required/>
-              <Btn type="submit" style={{width:'100%'}} size="lg" loading={loading}>Create Account</Btn>
+              <Btn type="submit" style={{width:'100%', background:'#0c2b54'}} size="lg" loading={loading}>Create Account</Btn>
               <p style={{fontSize:12,color:'#64748b',textAlign:'center',marginTop:10}}>
                 Your join code is given to you by the school office.
               </p>
@@ -116,16 +116,16 @@ export default function AuthPage() {
 
           {mode==='forgot' && (
             <form onSubmit={handleForgot}>
-              <h2 style={{ fontSize:20, fontWeight:700, color:'#0c447c', marginBottom:6 }}>Forgot your password?</h2>
+              <h2 style={{ fontSize:20, fontWeight:700, color:'#0c2b54', marginBottom:6 }}>Forgot your password?</h2>
               <p style={{ fontSize:13, color:'#64748b', marginBottom:18 }}>
                 Enter your email. The school office will be notified and will give you a temporary password in person.
               </p>
               <Notice tone="ok">{info}</Notice>
               <Input label="Email" type="email" value={form.email} autoComplete="username" onChange={e=>set('email',e.target.value)} placeholder="you@school.rw" required/>
-              <Btn type="submit" style={{width:'100%'}} size="lg" loading={loading}>Ask the office for a reset</Btn>
+              <Btn type="submit" style={{width:'100%', background:'#0c2b54'}} size="lg" loading={loading}>Ask the office for a reset</Btn>
               <div style={{ textAlign:'center', marginTop:14 }}>
                 <button type="button" onClick={()=>go('login')}
-                  style={{ background:'none', border:'none', color:'#185fa5', fontSize:14, cursor:'pointer', padding:8 }}>
+                  style={{ background:'none', border:'none', color:'#0c2b54', fontSize:14, cursor:'pointer', padding:8, fontWeight:500 }}>
                   ← Back to sign in
                 </button>
               </div>

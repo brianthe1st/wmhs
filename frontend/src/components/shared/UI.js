@@ -269,7 +269,7 @@ export function fmtDateShort(iso) {
 }
 
 // Custom Logo component using image
-export function Logo({ size=40 }) {
+export function Logo({ size=40, style={} }) {
   return (
     <img 
       src="/logo-512.png" 
@@ -279,7 +279,9 @@ export function Logo({ size=40 }) {
         height: size, 
         objectFit: 'contain', 
         flexShrink: 0,
-        borderRadius: 4
+        background: 'transparent',
+        filter: 'drop-shadow(0 4px 14px rgba(0,0,0,0.22))',
+        ...style
       }} 
     />
   );
